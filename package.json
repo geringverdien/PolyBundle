@@ -1,0 +1,13 @@
+{
+  "name": "polybundle",
+  "version": "0.1.0",
+  "description": "Lua script bundler for Polytoria.",
+  "license": "MIT",
+  "bin": {
+    "polybundle": "./bin/polybundle.js"
+  },
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  }
+}
