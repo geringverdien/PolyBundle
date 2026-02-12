@@ -6,6 +6,12 @@
   "bin": {
     "polybundle": "./bin/polybundle.js"
   },
+  "files": [
+    "bin/",
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
   "type": "commonjs",
   "engines": {
     "node": ">=18"
