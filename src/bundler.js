@@ -140,7 +140,7 @@ function bundleEntries(entries, rootDir) {
 
     const entrySource = fs.readFileSync(entryPath, "utf8");
     const replaced = replaceRequiresWithModuleRefs(entrySource, entryPath, rootDir, moduleKeyMap);
-    const wrapped = `coroutine.wrap(function()\n${normalizeLuaSource(replaced)}end)()`;
+    const wrapped = `spawn(function()\n${normalizeLuaSource(replaced)}end)`;
     const header = `-- polybundle: begin ${path.relative(rootDir, entryPath)}\n`;
     const footer = `-- polybundle: end ${path.relative(rootDir, entryPath)}\n`;
     chunks.push(header + normalizeLuaSource(wrapped) + footer);
