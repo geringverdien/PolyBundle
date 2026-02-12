@@ -4,6 +4,11 @@ Simple (heavily clanker-made) Lua script bundler for Polytoria.
 
 ## Installation
 
+install globally
+```
+npm install -g polybundle
+```
+
 install from this repo:
 
 ```
