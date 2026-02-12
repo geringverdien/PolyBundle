@@ -48,6 +48,8 @@ An array of entry script paths (order matters):
 ```
 
 ## Example Output:
+[Instance2Lua](https://github.com/geringverdien/Polytoria-Instance2Lua) is built using polybundle! Below is the bundled output from the boilerplate init scripts
+
 ```lua
 local __module_env = {}
 
@@ -63,18 +65,18 @@ return returnedLib
 end)()
 
 -- polybundle: begin scripts\init1.lua
-coroutine.wrap(function()
+spawn(function()
 local lib = __module_env["scripts/lib/library1.module.lua"]
 
 local addResult = lib.Add(2, 50)
 
 print(addResult)
 print("added successfully in init1")
-end)()
+end)
 -- polybundle: end scripts\init1.lua
 
 -- polybundle: begin scripts\init2.lua
-coroutine.wrap(function()
+spawn(function()
 local addLib = __module_env["scripts/lib/library1.module.lua"]
 
 local addResult = addLib.Add(9, 10)
@@ -84,6 +86,6 @@ local res = "add result is "
 local final = res .. tostring(addResult)
 
 print(final)
-end)()
+end)
 -- polybundle: end scripts\init2.lua
 ```
