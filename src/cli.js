@@ -123,7 +123,14 @@ function run(args) {
     : path.resolve(cwd, "dist", "bundle.lua");
 
   try {
+    // save output file, warn user about localscript string lenght limit if output exceeds 65,535 characters
     const bundled = bundleEntries(entries, cwd);
+    if (bundled.length > 65535) {
+      console.warn(
+        "Warning: Output exceeds 65,535 characters, which is the limit for LocalScripts in Polytoria.\n" +
+        "Consider splitting your code into multiple bundles or optimizing your code to reduce size."
+      );
+    }
     fs.mkdirSync(path.dirname(outFile), { recursive: true });
     fs.writeFileSync(outFile, bundled, "utf8");
     console.log(`Bundled ${entries.length} entries into ${outFile}`);

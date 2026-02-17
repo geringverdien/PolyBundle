@@ -121,14 +121,14 @@ function bundleEntries(entries, rootDir) {
   const moduleCache = new Map();
   const chunks = [];
 
-  chunks.push("local __module_env = {}\n");
+  chunks.push("local __module_env = {};\n");
 
   for (const modulePath of moduleList) {
     const moduleSource = fs.readFileSync(modulePath, "utf8");
     const bundledModule = bundleModuleSource(moduleSource, modulePath, rootDir, moduleKeyMap, moduleCache, []);
     const moduleKey = moduleKeyMap.get(modulePath);
     const header = `-- polybundle: module ${moduleKey}\n`;
-    const assignment = `__module_env[\"${moduleKey}\"] = (function()\n${normalizeLuaSource(bundledModule)}end)()\n`;
+    const assignment = `__module_env[\"${moduleKey}\"] = (function()\n${normalizeLuaSource(bundledModule)}end)();\n`;
     chunks.push(header + assignment);
   }
 
@@ -140,7 +140,7 @@ function bundleEntries(entries, rootDir) {
 
     const entrySource = fs.readFileSync(entryPath, "utf8");
     const replaced = replaceRequiresWithModuleRefs(entrySource, entryPath, rootDir, moduleKeyMap);
-    const wrapped = `spawn(function()\n${normalizeLuaSource(replaced)}end)`;
+    const wrapped = `spawn(function()\n${normalizeLuaSource(replaced)}end);`;
     const header = `-- polybundle: begin ${path.relative(rootDir, entryPath)}\n`;
     const footer = `-- polybundle: end ${path.relative(rootDir, entryPath)}\n`;
     chunks.push(header + normalizeLuaSource(wrapped) + footer);
